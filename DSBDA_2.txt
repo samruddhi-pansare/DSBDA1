@@ -1,0 +1,41 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv(r"C:\Users\Admin\OneDrive\Desktop\Prac_2.csv")
+
+df
+
+df.isnull()
+
+
+df.fillna({
+    'math score': df['math score'].mean(),
+    'reading score': df['reading score'].mean(),
+    'writing score': df['writing score'].mean(),
+     'placement score': df['placement score'].mean(),
+    'club join year': df['club join year'].mean(),
+    'placement offer count' : df['placement offer count'].mean()
+}, inplace=True)
+
+
+import matplotlib.pyplot as plt
+
+df.boxplot(column=['math score','reading score','writing score','placement score'])
+plt.show()
+
+
+Q1 = df['placement score'].quantile(0.25)
+Q3 = df['placement score'].quantile(0.75)
+
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+print(lower, upper)
+
+
+outliers = df[(df['placement score'] < lower) | (df['placement score'] > upper)]
+outliers
+
+df['reading score'] = df['reading score'].fillna(df['reading score'].mean())

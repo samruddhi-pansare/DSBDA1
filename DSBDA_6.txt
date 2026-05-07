@@ -1,0 +1,42 @@
+pip install pandas scikit-learn
+
+
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("C:/Users/System05/Downloads/heart.csv")
+
+
+X = data.drop("target", axis=1) 
+y = data["target"]
+
+from sklearn.model_selection import train_test_split
+ from sklearn.naive_bayes import GaussianNB
+ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, reca
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_sta
+
+print(len(X_train),len(X_test),len(y_train),len(y_test))
+
+model = GaussianNB() model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+
+print("Predicted values:") print(y_pred)
+
+accuracy = accuracy_score(y_test, y_pred) print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred) print("Precision:", precision)
+cm = confusion_matrix(y_test, y_pred)
+
+import seaborn as sns
+
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["No Disease", "Disease"], yticklabels=["No Disease", "Disease"])
+
+plt.xlabel("age") plt.ylabel("Actual") plt.title("Confusion Matrix - Heart Disease") plt.show()
+
+sns.lineplot(x="age", y="chol", data=data) plt.title("Smoothed Age vs Cholesterol") plt.show()
+
+sns.boxplot(x="target", y="chol", data=data) plt.xlabel("Heart Disease") plt.ylabel("Cholesterol") plt.title("Cholesterol vs Heart Disease") plt.show()
+

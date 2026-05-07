@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import preprocessing 
+
+df = pd.read_csv(r"C:\Users\Admin\OneDrive\ドキュメント\DSBDS\iris.csv")
+
+df.head()
+
+df['sepal_length'] = df['sepal_length'].astype(float)
+
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+
+X = df.iloc[:, :4]   # only features
+
+X_scaled = scaler.fit_transform(X)
+
+df_normalized = pd.DataFrame(X_scaled, columns=X.columns)
+
+df_normalized.head()
+
+
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+
+df['Species_encoded'] = le.fit_transform(df['species'])
+
+df.head()
+
+
+df_onehot = pd.get_dummies(df, columns=['species'])
+
+df_onehot.head()
