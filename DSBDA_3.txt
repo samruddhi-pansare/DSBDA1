@@ -1,0 +1,39 @@
+import pandas as pd
+import numpy as np
+import requests
+
+df = pd.read_csv(r"C:\Users\Admin\OneDrive\Desktop\Mall_Customers.csv")
+
+df
+
+df.Age.mean()
+df.Age.mode()
+df.Age.median()
+df.groupby(['Age']).count()
+
+df.groupby(['Genre']).count()
+
+df.Age.std()
+
+df[['Age' , 'Annual Income (k$)' , 'Spending Score (1-100)']].mean()
+
+df[['Age' , 'Annual Income (k$)' , 'Spending Score (1-100)']].mode()
+
+df[['Age' , 'Annual Income (k$)' , 'Spending Score (1-100)']].median()
+
+df2 = df.groupby('Genre')
+
+for Genre,Genre_f in df2:
+    print(Genre)
+    print(Genre_f)
+
+df2.get_group('Male')
+
+df2.get_group('Female')
+
+df2[['Age' , 'Annual Income (k$)','Spending Score (1-100)']].median()
+
+df2[['Age' , 'Annual Income (k$)','Spending Score (1-100)']].std()
+
+
+
