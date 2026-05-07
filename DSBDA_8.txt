@@ -1,0 +1,41 @@
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+import seaborn as sns
+
+sns.set(style="whitegrid") 
+plt.style.use('seaborn')
+
+titanic_df = sns.load_dataset('titanic')
+
+print(titanic_df.head())
+
+sns.distplot(x = titanic_df['age'], bins = 10
+
+sns.jointplot(x = titanic_df['age'], y = titanic_df['fare'], kind ='scatter')
+sns.jointplot(x = titanic_df['age'], y = titanic_df['fare'], kind ='hex')
+
+
+sns.countplot(x='survived', data=titanic_df) 
+plt.title("Survival Count") 
+plt.show()
+
+
+sns.rugplot(titanic_df['fare'])
+
+sns.barplot(x='sex', y='age', data=titanic_df)
+sns.boxplot(x='sex', y='age', data=titanic_df)
+
+sns.countplot(x='survived', data=titanic_df) 
+plt.title("Survival Count") 
+plt.show()
+
+sns.violinplot(x='sex', y='age', data=titanic_df)
+sns.stripplot(x='sex', y='age', data=titanic_df, jitter=False)
+sns.swarmplot(x='sex', y='age', data=titanic_df)
+corr = titanic_df.corr() sns.heatmap(corr, annot=True)
+plt.figure(figsize=(8,5)) sns.histplot(titanic_df['fare'], bins=30, kde=True) plt.title("Fare Distribution") plt.xlabel("Fare") plt.ylabel("Frequency") plt.show()
+plt.figure(figsize=(8,5)) sns.histplot(titanic_df['fare'], bins=30, kde=True) plt.title("Fare Distribution") plt.xlabel("Fare") plt.ylabel("Frequency") plt.show()
+
+
+

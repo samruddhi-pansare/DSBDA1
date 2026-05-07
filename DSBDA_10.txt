@@ -1,0 +1,32 @@
+import pandas as pd import matplotlib.pyplot as plt import seaborn as sns In [2]: df = pd.read_csv("https://raw.githubusercontent.com/shrikant-temburwar/Iris-Dataset/ In [3]: df.head()
+
+df["Species"].unique()
+
+df.groupby("Species").size()
+
+plt.figure(figsize=(8,6))
+ sns.heatmap(df.corr(numeric_only=True), annot=True) 
+plt.title("Feature Correlation Heatmap")
+ plt.show()
+
+df.hist(figsize=(10,8)) 
+plt.suptitle("Feature Distribution")
+
+plt.show()
+
+
+plt.figure(figsize=(10,6))
+ sns.boxplot(data=df.drop(["Id", "Species"], axis=1))
+ plt.title("Boxplot of Features") 
+plt.show()
+
+import numpy as np 
+for col in df.select_dtypes(include=np.number).columns:
+ Q1 = df[col].quantile(0.25) 
+Q3 = df[col].quantile(0.75)
+ IQR = Q3 - Q1 
+lower = Q1 - 1.5 * IQR
+ upper = Q3 + 1.5 * IQR
+
+ outliers = df[(df[col] < lower) | (df[col] > upper)]
+ print(f"{col}: {len(outliers)} outliers")
